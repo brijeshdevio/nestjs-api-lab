@@ -18,9 +18,10 @@ This repo is my backend learning playground — every module focuses on a specif
 
 ## 🧩 API Modules (In Progress)
 
-| #   | Module | Description | Status  |
-| --- | ------ | ----------- | ------- |
-| 1   | App    | Welcome     | ✅ Done |
+| #   | Module | Description                           | Status  |
+| --- | ------ | ------------------------------------- | ------- |
+| 1   | App    | Welcome                               | ✅ Done |
+| 2   | Auth   | Auth JWT signup/signin using mongoose | ✅ Done |
 
 ---
 
@@ -41,6 +42,7 @@ Create `.env` file using the example below:
 ```bash
 PORT=4000
 MONGODB_URI=
+JWT_SECRET=
 ```
 
 ### 3️⃣ Run the App
