@@ -40,6 +40,7 @@ Create `.env` file using the example below:
 
 ```bash
 PORT=4000
+MONGODB_URI=
 ```
 
 ### 3️⃣ Run the App
