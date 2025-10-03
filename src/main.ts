@@ -10,6 +10,7 @@ async function bootstrap() {
     .setDescription(
       `A collection of **small backend experiments and API modules** built using **NestJS**, designed to explore real-world backend concepts like authentication, CRUD, guards, pipes, and Prisma integration.`,
     )
+    .addBearerAuth()
     .setVersion('1.0')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);

@@ -2,7 +2,9 @@ import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from 'src/schema/user.schema';
 import { AuthGuard } from 'src/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @UseGuards(AuthGuard)
 @Controller('user')
 export class UserController {
