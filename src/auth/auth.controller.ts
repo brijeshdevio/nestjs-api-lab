@@ -1,8 +1,8 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import { Body, Controller, Post, Res, UseGuards } from '@nestjs/common';
 import type { Response } from 'express';
 import { AuthService } from './auth.service';
 import { SignInAuthDto, SignUpAuthDto } from './dto';
-import { apiResponse } from 'src/common';
+import { apiResponse, AuthGuard } from 'src/common';
 
 @Controller('auth')
 export class AuthController {
@@ -27,5 +27,12 @@ export class AuthController {
     const { accessToken, user } = await this.authService.signIn(body);
     res.cookie('accessToken', accessToken);
     return apiResponse(res, { data: { user }, rest: { accessToken } });
+  }
+
+  @UseGuards(AuthGuard)
+  @Post('signout')
+  handleSignOut(@Res() res: Response): Response {
+    res.clearCookie('accessToken');
+    return apiResponse(res, { message: 'Sign out successfully' });
   }
 }
