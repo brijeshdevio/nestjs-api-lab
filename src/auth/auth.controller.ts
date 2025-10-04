@@ -25,6 +25,7 @@ export class AuthController {
     @Res() res: Response,
   ): Promise<Response> {
     const { accessToken, user } = await this.authService.signIn(body);
+    res.cookie('accessToken', accessToken);
     return apiResponse(res, { data: { user }, rest: { accessToken } });
   }
 }
