@@ -1,3 +1,4 @@
+import { apiResponse } from './apiResponse';
 import { AuthGuard } from './authGuard';
 
-export { AuthGuard };
+export { apiResponse, AuthGuard };

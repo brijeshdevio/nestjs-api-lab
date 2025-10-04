@@ -1,7 +1,7 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
+import type { Response } from 'express';
 import { UserService } from './user.service';
-import { User } from 'src/schema/user.schema';
-import { AuthGuard } from 'src/common';
+import { apiResponse, AuthGuard } from 'src/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiBearerAuth()
@@ -11,8 +11,11 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get('profile')
-  async handleGetProfile(@Req() req: { user: { id: string } }): Promise<User> {
+  async handleGetProfile(
+    @Req() req: { user: { id: string } },
+    @Res() res: Response,
+  ): Promise<Response> {
     const user = await this.userService.getProfile(req.user.id);
-    return user;
+    return apiResponse(res, { data: { user } });
   }
 }
