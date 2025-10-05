@@ -4,6 +4,8 @@ import { AuthController } from './auth.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from 'src/schema/user.schema';
 import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { GithubStrategy } from './github.strategy';
 
 @Module({
   imports: [
@@ -13,8 +15,9 @@ import { JwtModule } from '@nestjs/jwt';
       secret: process.env.JWT_ACCESS_SECRET as string,
       signOptions: { expiresIn: '60s' },
     }),
+    PassportModule.register({ session: true }),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, GithubStrategy],
 })
 export class AuthModule {}

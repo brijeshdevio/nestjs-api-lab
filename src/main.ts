@@ -4,10 +4,18 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import cookieParser from 'cookie-parser';
+import session from 'express-session';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
+  app.use(
+    session({
+      secret: 'supersecretkey',
+      resave: false,
+      saveUninitialized: false,
+    }),
+  );
   app.use(cookieParser());
   const config = new DocumentBuilder()
     .setTitle('NestJS API Lab!')

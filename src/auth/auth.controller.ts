@@ -1,5 +1,14 @@
-import { Body, Controller, Post, Req, Res, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import type { Response } from 'express';
+import { AuthGuard as PassportAuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { SignInAuthDto, SignUpAuthDto } from './dto';
 import { apiResponse, AuthGuard, RefreshTokenGuard } from 'src/common';
@@ -55,5 +64,20 @@ export class AuthController {
     return apiResponse(res, {
       rest: { accessToken, refreshToken },
     });
+  }
+
+  @Get('github')
+  @UseGuards(PassportAuthGuard('github'))
+  googleAuth() {
+    return;
+  }
+
+  @Get('github/callback')
+  @UseGuards(PassportAuthGuard('github'))
+  googleAuthRedirect(@Req() req: { user: string }) {
+    return {
+      message: 'User info from Github',
+      user: req.user,
+    };
   }
 }
