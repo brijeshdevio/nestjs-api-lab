@@ -17,6 +17,16 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
+  private async getTokens(id: string) {
+    const payload = { id };
+    const accessToken = await this.jwtService.signAsync(payload);
+    const refreshToken = await this.jwtService.signAsync(payload, {
+      secret: process.env.JWT_REFRESH_SECRET as string,
+      expiresIn: '30d',
+    });
+    return { accessToken, refreshToken };
+  }
+
   async signUp(data: SignUpAuthDto) {
     data.password = await argon2.hash(data.password);
     try {
@@ -49,11 +59,12 @@ export class AuthService {
     }
     user.password = undefined as unknown as string;
 
-    const payload = { id: user._id };
-    const accessToken = await this.jwtService.signAsync(payload);
-    return {
-      accessToken,
-      user,
-    };
+    const tokens = await this.getTokens(String(user._id));
+    return { user, ...tokens };
+  }
+
+  async refreshToken(id: string) {
+    const tokens = await this.getTokens(id);
+    return tokens;
   }
 }

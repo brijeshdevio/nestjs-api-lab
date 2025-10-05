@@ -1,8 +1,8 @@
-import { Body, Controller, Post, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, Req, Res, UseGuards } from '@nestjs/common';
 import type { Response } from 'express';
 import { AuthService } from './auth.service';
 import { SignInAuthDto, SignUpAuthDto } from './dto';
-import { apiResponse, AuthGuard } from 'src/common';
+import { apiResponse, AuthGuard, RefreshTokenGuard } from 'src/common';
 
 @Controller('auth')
 export class AuthController {
@@ -24,9 +24,14 @@ export class AuthController {
     @Body() body: SignInAuthDto,
     @Res() res: Response,
   ): Promise<Response> {
-    const { accessToken, user } = await this.authService.signIn(body);
+    const { accessToken, user, refreshToken } =
+      await this.authService.signIn(body);
     res.cookie('accessToken', accessToken);
-    return apiResponse(res, { data: { user }, rest: { accessToken } });
+    res.cookie('refreshToken', refreshToken);
+    return apiResponse(res, {
+      data: { user },
+      rest: { accessToken, refreshToken },
+    });
   }
 
   @UseGuards(AuthGuard)
@@ -34,5 +39,21 @@ export class AuthController {
   handleSignOut(@Res() res: Response): Response {
     res.clearCookie('accessToken');
     return apiResponse(res, { message: 'Sign out successfully' });
+  }
+
+  @UseGuards(RefreshTokenGuard)
+  @Post('refresh-token')
+  async handleRefreshToken(
+    @Req() req: { user: { id: string } },
+    @Res() res: Response,
+  ): Promise<Response> {
+    const { accessToken, refreshToken } = await this.authService.refreshToken(
+      req.user.id,
+    );
+    res.cookie('accessToken', accessToken);
+    res.cookie('refreshToken', refreshToken);
+    return apiResponse(res, {
+      rest: { accessToken, refreshToken },
+    });
   }
 }
