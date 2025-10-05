@@ -5,6 +5,8 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -12,10 +14,24 @@ import { UserModule } from './user/user.module';
       isGlobal: true,
     }),
     MongooseModule.forRoot(process.env.MONGODB_URI as string),
+    ThrottlerModule.forRoot({
+      throttlers: [
+        {
+          ttl: 60000 * 15,
+          limit: 100,
+        },
+      ],
+    }),
     AuthModule,
     UserModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+    AppService,
+  ],
 })
 export class AppModule {}
