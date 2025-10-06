@@ -12,6 +12,7 @@ import { AuthGuard as PassportAuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { SignInAuthDto, SignUpAuthDto } from './dto';
 import { apiResponse, AuthGuard, RefreshTokenGuard } from 'src/common';
+import { GITHUB_PROFILE } from 'src/types';
 
 @Controller('auth')
 export class AuthController {
@@ -74,10 +75,17 @@ export class AuthController {
 
   @Get('github/callback')
   @UseGuards(PassportAuthGuard('github'))
-  googleAuthRedirect(@Req() req: { user: string }) {
-    return {
-      message: 'User info from Github',
-      user: req.user,
-    };
+  async handleGithubCallback(
+    @Req() req: { user: GITHUB_PROFILE },
+    @Res() res: Response,
+  ): Promise<Response> {
+    const { accessToken, refreshToken } = await this.authService.github(
+      req.user,
+    );
+    res.cookie('accessToken', accessToken);
+    res.cookie('refreshToken', refreshToken);
+    return apiResponse(res, {
+      rest: { accessToken, refreshToken },
+    });
   }
 }

@@ -14,7 +14,7 @@ export class UserService {
     const user = await this.userModel
       .findById(id)
       .lean()
-      .select('-__v -password');
+      .select('-__v -password -providers');
     if (!user) {
       throw new UnauthorizedException('You are not authorized');
     }
