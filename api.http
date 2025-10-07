@@ -24,3 +24,54 @@ Content-Type: application/json
 ### GET /auth/signin
 GET http://localhost:3000/user/profile
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MGIxYThiNGIyMDE0ZjA5ZTJhZjlkMCIsImlhdCI6MTc2MjMzNzAzOSwiZXhwIjoxNzYyMzM3MDk5fQ.mJnRPP5M2M6g_IHFXZxUGh_W_9ZukZbH73MBnTHzvq4
+
+
+### GET /auth/signout
+GET http://localhost:3000/auth/signout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MGIxYThiNGIyMDE0ZjA5ZTJhZjlkMCIsImlhdCI6MTc2MjMzNzAzOSwiZXhwIjoxNzYyMzM3MDk5fQ.mJnRPP5M2M6g_IHFXZxUGh_W_9ZukZbH73MBnTHzvq4
+
+
+### POST /auth/refresh-token
+POST http://localhost:3000/auth/refresh-token
+X-Refresh-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MGIxYThiNGIyMDE0ZjA5ZTJhZjlkMCIsImlhdCI6MTc2MjMzNzAzOSwiZXhwIjoxNzYyMzM3MDk5fQ.mJnRPP5M2M6g_IHFXZxUGh_W_9ZukZbH73MBnTHzvq4
+
+
+### GET /user/profile
+GET http://localhost:3000/user/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MGIxYThiNGIyMDE0ZjA5ZTJhZjlkMCIsImlhdCI6MTc2MjMzNzAzOSwiZXhwIjoxNzYyMzM3MDk5fQ.mJnRPP5M2M6g_IHFXZxUGh_W_9ZukZbH73MBnTHzvq4
+
+
+### PUT /user/profile
+PUT http://localhost:3000/user/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MGIxYThiNGIyMDE0ZjA5ZTJhZjlkMCIsImlhdCI6MTc2MjMzNzAzOSwiZXhwIjoxNzYyMzM3MDk5fQ.mJnRPP5M2M6g_IHFXZxUGh_W_9ZukZbH73MBnTHzvq4
+
+{
+  "name": "Brijesh Dev"
+}
+
+
+### POST /user/change-password
+POST http://localhost:3000/user/change-password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MGIxYThiNGIyMDE0ZjA5ZTJhZjlkMCIsImlhdCI6MTc2MjMzNzAzOSwiZXhwIjoxNzYyMzM3MDk5fQ.mJnRPP5M2M6g_IHFXZxUGh_W_9ZukZbH73MBnTHzvq4
+
+{
+  "password": "R18a1m13@#"
+}
+
+
+### POST /posts
+POST http://localhost:3000/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MGIxYThiNGIyMDE0ZjA5ZTJhZjlkMCIsImlhdCI6MTc2MjMzNzAzOSwiZXhwIjoxNzYyMzM3MDk5fQ.mJnRPP5M2M6g_IHFXZxUGh_W_9ZukZbH73MBnTHzvq4
+
+{
+  "title": "Understanding Dependency Injection in NestJS",
+  "content": "Dependency Injection (DI) is one of the core concepts in NestJS. It allows developers to write more modular and testable code by letting the framework handle the creation and resolution of dependencies...",
+  "featuredImageUrl": "https://example.com/images/nestjs-di-guide.jpg",
+  "status": "published",
+  "metaTitle": "A Deep Dive into Dependency Injection in NestJS",
+  "metaDescription": "Learn how Dependency Injection works in NestJS and how it helps build scalable and maintainable applications."
+}
+
+
+### GET /posts
+GET http://localhost:3000/posts
