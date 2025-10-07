@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Req,
   Res,
@@ -31,5 +32,14 @@ export class PostController {
   async handleGetPosts(@Res() res: Response): Promise<Response> {
     const posts = await this.postService.getPosts();
     return apiResponse(res, { data: { posts } });
+  }
+
+  @Get(':id')
+  async handleGetPost(
+    @Param('id') id: string,
+    @Res() res: Response,
+  ): Promise<Response> {
+    const post = await this.postService.getPost(id);
+    return apiResponse(res, { data: { post } });
   }
 }
