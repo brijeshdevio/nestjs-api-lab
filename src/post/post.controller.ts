@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Req,
   Res,
   UseGuards,
@@ -41,5 +42,18 @@ export class PostController {
   ): Promise<Response> {
     const post = await this.postService.getPost(id);
     return apiResponse(res, { data: { post } });
+  }
+
+  @Put(':id')
+  async handleUpdatePost(
+    @Param('id') id: string,
+    @Body() body: any,
+    @Res() res: Response,
+  ): Promise<Response> {
+    const post = await this.postService.updatePost(id, body);
+    return apiResponse(res, {
+      data: { post },
+      message: 'Post updated successfully.',
+    });
   }
 }

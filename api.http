@@ -75,3 +75,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MGIxYThiN
 
 ### GET /posts
 GET http://localhost:3000/posts
+
+
+### GET /posts/:id
+GET http://localhost:3000/posts/690db15591e976b114a53594
+
+
+### PUT /posts/690db15591e976b114a53594
+PUT http://localhost:3000/posts/690db15591e976b114a53594
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MGIxYThiNGIyMDE0ZjA5ZTJhZjlkMCIsImlhdCI6MTc2MjMzNzAzOSwiZXhwIjoxNzYyMzM3MDk5fQ.mJnRPP5M2M6g_IHFXZxUGh_W_9ZukZbH73MBnTHzvq4
+
+{
+  "status": "draft",
+}
