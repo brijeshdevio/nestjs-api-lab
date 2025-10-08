@@ -77,4 +77,13 @@ export class PostService {
 
     throw new NotFoundException(`Post with id ${id} not found.`);
   }
+
+  async deletePost(id: string): Promise<Post> {
+    this.isValidId(id);
+    const post = await this.postModel.findByIdAndDelete(id);
+    if (post) {
+      return post;
+    }
+    throw new NotFoundException(`Post with id ${id} not found.`);
+  }
 }

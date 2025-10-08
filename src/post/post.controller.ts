@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -44,6 +45,7 @@ export class PostController {
     return apiResponse(res, { data: { post } });
   }
 
+  @UseGuards(AuthGuard)
   @Put(':id')
   async handleUpdatePost(
     @Param('id') id: string,
@@ -55,5 +57,15 @@ export class PostController {
       data: { post },
       message: 'Post updated successfully.',
     });
+  }
+
+  @UseGuards(AuthGuard)
+  @Delete(':id')
+  async handleDeletePost(
+    @Param('id') id: string,
+    @Res() res: Response,
+  ): Promise<Response> {
+    await this.postService.deletePost(id);
+    return apiResponse(res, { message: 'Post deleted successfully.' });
   }
 }

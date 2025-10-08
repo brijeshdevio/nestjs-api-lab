@@ -88,3 +88,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MGIxYThiN
 {
   "status": "draft",
 }
+
+
+### DELETE /posts/690db15591e976b114a53594
+DELETE  http://localhost:3000/posts/690db15591e976b114a53594
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MGIxYThiNGIyMDE0ZjA5ZTJhZjlkMCIsImlhdCI6MTc2MjMzNzAzOSwiZXhwIjoxNzYyMzM3MDk5fQ.mJnRPP5M2M6g_IHFXZxUGh_W_9ZukZbH73MBnTHzvq4
