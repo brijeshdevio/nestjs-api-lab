@@ -78,9 +78,9 @@ export class PostService {
     throw new NotFoundException(`Post with id ${id} not found.`);
   }
 
-  async deletePost(id: string): Promise<Post> {
+  async deletePost(author: string, id: string): Promise<Post> {
     this.isValidId(id);
-    const post = await this.postModel.findByIdAndDelete(id);
+    const post = await this.postModel.findOneAndDelete({ author, _id: id });
     if (post) {
       return post;
     }

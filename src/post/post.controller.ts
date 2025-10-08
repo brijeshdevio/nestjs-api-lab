@@ -63,10 +63,11 @@ export class PostController {
   @UseGuards(AuthGuard)
   @Delete(':id')
   async handleDeletePost(
+    @Req() req: { user: { id: string } },
     @Param('id') id: string,
     @Res() res: Response,
   ): Promise<Response> {
-    await this.postService.deletePost(id);
+    await this.postService.deletePost(req.user.id, id);
     return apiResponse(res, { message: 'Post deleted successfully.' });
   }
 }
