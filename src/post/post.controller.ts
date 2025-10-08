@@ -48,11 +48,12 @@ export class PostController {
   @UseGuards(AuthGuard)
   @Put(':id')
   async handleUpdatePost(
+    @Req() req: { user: { id: string } },
     @Param('id') id: string,
     @Body() body: any,
     @Res() res: Response,
   ): Promise<Response> {
-    const post = await this.postService.updatePost(id, body);
+    const post = await this.postService.updatePost(req.user.id, id, body);
     return apiResponse(res, {
       data: { post },
       message: 'Post updated successfully.',

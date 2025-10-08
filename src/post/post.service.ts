@@ -62,10 +62,10 @@ export class PostService {
     throw new NotFoundException(`Post with id ${id} not found.`);
   }
 
-  async updatePost(id: string, data: any): Promise<Post> {
+  async updatePost(author: string, id: string, data: any): Promise<Post> {
     this.isValidId(id);
     const post = await this.postModel
-      .findByIdAndUpdate(id, data, {
+      .findOneAndUpdate({ author, _id: id }, data, {
         new: true,
       })
       .lean()
