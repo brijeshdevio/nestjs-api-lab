@@ -22,6 +22,7 @@ This repo is my backend learning playground — every module focuses on a specif
 | --- | ------ | ------------------------------------- | ------- |
 | 1   | App    | Welcome                               | ✅ Done |
 | 2   | Auth   | Auth JWT signup/signin using mongoose | ✅ Done |
+| 3   | User   | User get own profile with auth-guard  | ✅ Done |
 
 ---
 
