@@ -1,0 +1,22 @@
+### GET /
+GET http://localhost:3000
+
+### POST /auth/signup
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+  "name": "Brijesh",
+  "email": "brijesh@duck.com",
+  "password": "r18a1m13"
+}
+
+
+### POST /auth/signin
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+  "email": "brijesh@duck.com",
+  "password": "r18a1m13"
+}
