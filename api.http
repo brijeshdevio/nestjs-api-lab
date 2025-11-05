@@ -20,3 +20,7 @@ Content-Type: application/json
   "email": "brijesh@duck.com",
   "password": "r18a1m13"
 }
+
+### GET /auth/signin
+GET http://localhost:3000/user/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MGIxYThiNGIyMDE0ZjA5ZTJhZjlkMCIsImlhdCI6MTc2MjMzNzAzOSwiZXhwIjoxNzYyMzM3MDk5fQ.mJnRPP5M2M6g_IHFXZxUGh_W_9ZukZbH73MBnTHzvq4
